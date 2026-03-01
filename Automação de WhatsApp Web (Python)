@@ -1,0 +1,12 @@
+import webbrowser
+import time
+import pyautogui
+
+numero = "5511999999999"  # coloque o número com DDD
+mensagem = "Fala chefe, mensagem automática aqui 😎"
+
+link = f"https://web.whatsapp.com/send?phone={numero}&text={mensagem}"
+webbrowser.open(link)
+
+time.sleep(15)  # tempo pra carregar o WhatsApp Web
+pyautogui.press("enter")
