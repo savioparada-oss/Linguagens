@@ -1,0 +1,23 @@
+import os
+import shutil
+
+pasta = "C:/Users/SeuUsuario/Downloads"
+
+tipos = {
+    "Imagens": [".png", ".jpg", ".jpeg"],
+    "PDFs": [".pdf"],
+    "Videos": [".mp4", ".mkv"],
+    "Programas": [".exe"]
+}
+
+for arquivo in os.listdir(pasta):
+    caminho_arquivo = os.path.join(pasta, arquivo)
+
+    for pasta_nome, extensoes in tipos.items():
+        if arquivo.endswith(tuple(extensoes)):
+            destino = os.path.join(pasta, pasta_nome)
+
+            if not os.path.exists(destino):
+                os.mkdir(destino)
+
+            shutil.move(caminho_arquivo, os.path.join(destino, arquivo))
