@@ -1,0 +1,32 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+url = "https://g1.globo.com/"
+
+headers = {
+    "User-Agent": "Mozilla/5.0"
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    titulos = []
+    
+    for item in soup.find_all("a"):
+        texto = item.get_text().strip()
+        if len(texto) > 40:  # filtra textos maiores (prováveis títulos)
+            titulos.append(texto)
+
+    # Remove duplicados
+    titulos = list(set(titulos))
+
+    # Cria planilha
+    df = pd.DataFrame({"Titulos": titulos})
+    df.to_csv("noticias_g1.csv", index=False, encoding="utf-8-sig")
+
+    print("Dados salvos com sucesso!")
+else:
+    print("Erro ao acessar o site.")
