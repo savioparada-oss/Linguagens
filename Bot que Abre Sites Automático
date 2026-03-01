@@ -1,0 +1,12 @@
+import webbrowser
+import time
+
+sites = [
+    "https://youtube.com",
+    "https://github.com",
+    "https://google.com"
+]
+
+for site in sites:
+    webbrowser.open(site)
+    time.sleep(5)
